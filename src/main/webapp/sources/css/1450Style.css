@@ -1,0 +1,184 @@
+/***1450Style.css****/
+.body_bg {
+    background: rgba(0, 0, 0, 0) url("../img/login_bg.jpg") no-repeat fixed center / cover;
+}
+.whole {
+    width: 30%;
+    min-width: 400px;
+    background: #f2f2f2;
+    margin: 0 auto;
+    margin-top: 30px;
+    padding-bottom: 50px;
+    opacity: 0.9;
+    filter: alpha(opacity=90);
+    position: relative;
+}
+
+.title {
+    width: 100%;
+    height: 60px;
+    background: #438eb9;
+    line-height: 60px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.form_box {
+    margin-top: 30px;
+}
+
+.input_tit {
+    width: 100%;
+    height: 30px;
+    margin-top: 10px;
+    line-height: 30px;
+    color: #66a3ff;
+    text-align: center;
+    font-size: 1.1em;
+}
+
+.input_box {
+    width: 80%;
+    height: 30px;
+    margin-left: 10%;
+    margin-top: 10px;
+}
+
+.input_self {
+    width: 60%;
+    height: 40px;
+    font-size: 16px;
+    border: 1px solid #438eb9;
+    text-indent: 10px;
+    outline: none;
+    margin-left: 20%;
+}
+
+/*
+focus鼠标选中后会改变成的样式
+*/
+.input_self:focus {
+    box-shadow: 0px 0px 6px #438eb9;
+}
+
+.finish_box {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 50px;
+}
+
+.finish_btn {
+    width: 60%;
+    height: 40px;
+    line-height: 40px;
+    background: #66a3ff;
+    color: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: 20%;
+}
+
+/*
+hover鼠标碰到后会改变成的样式
+*/
+.finish_btn:hover {
+    box-shadow: 0px 0px 3px #000;
+    background-color: #438eb9;
+}
+
+.signup {
+    width: 5%;
+    height: 40px;
+    line-height: 40px;
+    background: #66a3ff;
+    color: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.signupdiv {
+    text-align: right;
+}
+
+.adminlogindiv {
+    width: 30%;
+    text-align: center;
+    margin-left: 35%;
+}
+
+.adminlogin {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: #66a3ff;
+    color: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    opacity: 0.87;
+    filter: alpha(opacity=90);
+}
+
+.blank_30 {
+    height: 30px;
+}
+
+.header-area {
+    width: 100%;
+    height: 50px;
+    background-color: #66a3ff;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    float: right;
+}
+
+.dropbtn {
+    width: 100%;
+    height: 50px;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
+    line-height: 50px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    float: right;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    margin-top: 50px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}

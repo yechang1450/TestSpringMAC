@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qcby.dao.CategoryMapper">
+  <resultMap id="BaseResultMap" type="com.qcby.entity.Category">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="categoryName" jdbcType="VARCHAR" property="categoryName" />
+    <result column="categoryStatus" jdbcType="BIT" property="categoryStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, categoryName, categoryStatus
+  </sql>
+  <select id="findCategoryList" resultMap="BaseResultMap" resultType="com.qcby.entity.Category">
+    select
+    <include refid="Base_Column_List"/>
+    from t_category
+    where 1 = 1
+    <if test="category.categoryName != null and category.categoryName !=''">
+      and categoryName like concat( '%', #{category.categoryName}, '%')
+    </if>
+    order by id desc
+    limit #{pageIndex},#{pageSize};
+  </select>
+  <delete id="deleteCategoryById">
+     delete from t_category
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="addCategory">
+    insert into t_category (id, categoryName,
+      categoryStatus)
+    values (#{id,jdbcType=INTEGER}, #{categoryName,jdbcType=VARCHAR},
+      #{categoryStatus,jdbcType=BIT})
+  </insert>
+  <update id="updateCategory">
+    update t_category
+    set categoryName = #{categoryName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateCategoryStatus">
+    update t_category
+    set categoryStatus = #{categoryStatus,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectCount" resultType="java.lang.Integer">
+   SELECT count(*) FROM t_category;
+  </select>
+</mapper>

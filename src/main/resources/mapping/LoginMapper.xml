@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qcby.dao.LoginMapper">
+    <resultMap id="BaseResultMap" type="com.qcby.entity.Login">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="adminName" jdbcType="VARCHAR" property="adminName"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="sex" jdbcType="VARCHAR" property="sex"/>
+        <result column="phone" jdbcType="BIGINT" property="phone"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="status" jdbcType="BIT" property="status"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, adminName, password, sex, phone, address, status
+  </sql>
+    <select id="selectAll" resultMap="BaseResultMap" resultType="com.qcby.entity.Login">
+        select
+        <include refid="Base_Column_List"/>
+        from t_admin
+        where 1 = 1
+        <if test="login.adminName != null and login.adminName !=''">
+            and adminName like concat( '%', #{login.adminName}, '%')
+        </if>
+        order by id desc
+        limit #{pageIndex},#{pageSize};
+    </select>
+    <select id="selectCount" resultType="java.lang.Integer">
+        select COUNT(*) FROM t_admin;
+    </select>
+    <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_admin
+        where adminName = #{adminName,jdbcType=VARCHAR};
+    </select>
+    <select id="selectByTel" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_admin
+        where phone = #{phone,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Long">
+    delete from t_admin
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.qcby.entity.Login">
+    insert into t_admin ( adminName, password,
+      sex, phone, address, 
+      status)
+    values (#{adminName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{sex,jdbcType=VARCHAR}, #{phone,jdbcType=BIGINT}, #{address,jdbcType=VARCHAR},
+      #{status,jdbcType=BIT})
+  </insert>
+    <update id="update" parameterType="com.qcby.entity.Login">
+    update t_admin
+    set adminName = #{adminName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=BIGINT},
+      address = #{address,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <update id="updateSex" parameterType="com.qcby.entity.Login">
+    update t_admin
+    set sex = #{sex,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <update id="updateStatus" parameterType="com.qcby.entity.Login">
+    update t_admin
+    set status = #{status,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <update id="updatePwd" parameterType="com.qcby.entity.Login">
+    update t_admin
+    set password = #{password,jdbcType=VARCHAR}
+    where adminName = #{adminName,jdbcType=VARCHAR}
+  </update>
+</mapper>

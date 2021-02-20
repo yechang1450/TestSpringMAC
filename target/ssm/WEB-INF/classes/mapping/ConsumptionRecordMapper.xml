@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qcby.dao.ConsumptionRecordMapper">
+  <resultMap id="BaseResultMap" type="com.qcby.entity.ConsumptionRecord">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="consumption" jdbcType="VARCHAR" property="consumption" />
+    <result column="consumption_time" jdbcType="TIMESTAMP" property="consumption_time" />
+    <result column="consumption_detail" jdbcType="VARCHAR" property="consumption_detail" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userName, consumption, consumption_time, consumption_detail
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from "t_consumptionrecord"
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from "t_consumptionrecord"
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qcby.entity.ConsumptionRecord">
+    insert into "t_consumptionrecord" (id, userName, consumption, 
+      consumption_time, consumption_detail)
+    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{consumption,jdbcType=VARCHAR}, 
+      #{consumption_time,jdbcType=TIMESTAMP}, #{consumption_detail,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qcby.entity.ConsumptionRecord">
+    insert into "t_consumptionrecord"
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="consumption != null">
+        consumption,
+      </if>
+      <if test="consumption_time != null">
+        consumption_time,
+      </if>
+      <if test="consumption_detail != null">
+        consumption_detail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="consumption != null">
+        #{consumption,jdbcType=VARCHAR},
+      </if>
+      <if test="consumption_time != null">
+        #{consumption_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="consumption_detail != null">
+        #{consumption_detail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qcby.entity.ConsumptionRecord">
+    update "t_consumptionrecord"
+    <set>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="consumption != null">
+        consumption = #{consumption,jdbcType=VARCHAR},
+      </if>
+      <if test="consumption_time != null">
+        consumption_time = #{consumption_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="consumption_detail != null">
+        consumption_detail = #{consumption_detail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qcby.entity.ConsumptionRecord">
+    update "t_consumptionrecord"
+    set userName = #{userName,jdbcType=VARCHAR},
+      consumption = #{consumption,jdbcType=VARCHAR},
+      consumption_time = #{consumption_time,jdbcType=TIMESTAMP},
+      consumption_detail = #{consumption_detail,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="findUserConsumptionRecord" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from t_consumptionrecord
+    where 1 = 1
+    <if test="consumptionRecord.userName != null and consumptionRecord.userName !=''">
+      and userName like concat( '%', #{consumptionRecord.userName}, '%')
+    </if>
+    order by consumption_time desc
+    limit #{pageIndex},#{pageSize};
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer">
+   SELECT count(*) FROM t_consumptionrecord;
+  </select>
+</mapper>
